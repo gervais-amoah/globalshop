@@ -1,13 +1,22 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { Col, Row, Image, ListGroup, Card, Button } from "react-bootstrap";
-import products from "../products";
+import React, { useEffect, useState } from "react";
+import { Button, Card, Col, Image, ListGroup, Row } from "react-bootstrap";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
+
 import Rating from "../components/Rating";
 
 function ProductScreen() {
   const { id: productId } = useParams();
-  const product = products.find((p) => p._id === productId);
+  const [product, setProduct] = useState(null);
+
+  useEffect(() => {
+    const fecthProductData = async () => {
+      const { data } = await axios.get(`/api/products/${productId}`);
+      if (data) setProduct(data);
+    };
+
+    fecthProductData();
+  }, [productId]);
 
   if (!product) return <p>Opps, it does not exist</p>;
 

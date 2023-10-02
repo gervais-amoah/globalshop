@@ -1,18 +1,5 @@
 const products = [
   {
-    _id: "1",
-    name: "Airpods Wireless Bluetooth Headphones",
-    image: "/images/airpods.jpg",
-    description:
-      "Bluetooth technology lets you connect it with compatible devices wirelessly High-quality AAC audio offers immersive listening experience Built-in microphone allows you to take calls while working",
-    brand: " Apple",
-    category: "Electron ics ",
-    price: 89.99,
-    countInStock: 10,
-    rating: 4.5,
-    numReviews: 12,
-  },
-  {
     _id: "2",
     name: "Samsung Galaxy S21",
     image: "/images/samsung.jpg",
@@ -26,19 +13,6 @@ const products = [
     numReviews: 8,
   },
   {
-    _id: "3",
-    name: "Sony PlayStation 5",
-    image: "/images/playstation.jpg",
-    description:
-      "Experience next-gen gaming with the Sony PlayStation 5 console.",
-    brand: "Sony",
-    category: "Gaming",
-    price: 499.99,
-    countInStock: 3,
-    rating: 2,
-    numReviews: 15,
-  },
-  {
     _id: "4",
     name: "iPhone 14 Pro",
     image: "/images/phone.jpg",
@@ -50,6 +24,32 @@ const products = [
     countInStock: 7,
     rating: 3,
     numReviews: 10,
+  },
+  {
+    _id: "1",
+    name: "Airpods Wireless Bluetooth Headphones",
+    image: "/images/airpods.jpg",
+    description:
+      "Bluetooth technology lets you connect it with compatible devices wirelessly High-quality AAC audio offers immersive listening experience Built-in microphone allows you to take calls while working",
+    brand: " Apple",
+    category: "Electron ics ",
+    price: 89.99,
+    countInStock: 10,
+    rating: 4.5,
+    numReviews: 12,
+  },
+  {
+    _id: "3",
+    name: "Sony PlayStation 5",
+    image: "/images/playstation.jpg",
+    description:
+      "Experience next-gen gaming with the Sony PlayStation 5 console.",
+    brand: "Sony",
+    category: "Gaming",
+    price: 499.99,
+    countInStock: 3,
+    rating: 2,
+    numReviews: 15,
   },
   {
     _id: "5",
