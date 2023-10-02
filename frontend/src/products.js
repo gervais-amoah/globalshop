@@ -35,7 +35,7 @@ const products = [
     category: "Gaming",
     price: 499.99,
     countInStock: 3,
-    rating: 4.9,
+    rating: 2,
     numReviews: 15,
   },
   {
@@ -48,7 +48,7 @@ const products = [
     category: "Electronics",
     price: 1299.99,
     countInStock: 7,
-    rating: 4.7,
+    rating: 3,
     numReviews: 10,
   },
   {
@@ -61,7 +61,7 @@ const products = [
     category: "Photography",
     price: 2499.99,
     countInStock: 2,
-    rating: 4.6,
+    rating: 5,
     numReviews: 18,
   },
   {
@@ -74,7 +74,7 @@ const products = [
     category: "Electronics",
     price: 29.99,
     countInStock: 0,
-    rating: 4,
+    rating: 2.5,
     numReviews: 12,
   },
 ];
