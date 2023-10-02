@@ -1,5 +1,11 @@
 import React from "react";
+import Header from "./components/Header";
 
 export default function App() {
-  return <div>Welcome to General Shop!</div>;
+  return (
+    <>
+      <Header />
+      <div>Welcome to General Shop!</div>
+    </>
+  );
 }
