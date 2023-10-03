@@ -15,6 +15,9 @@ import {
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
 
+import { Provider } from "react-redux";
+import store from "./store";
+
 const route = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
