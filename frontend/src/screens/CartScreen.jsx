@@ -86,7 +86,7 @@ function CartScreen() {
               </h2>
               $
               {cartItems
-                .reduce((acc, item) => item.price * item.qty, 0)
+                .reduce((acc, item) => acc + item.price * item.qty, 0)
                 .toFixed(2)}
             </ListGroup.Item>
             <ListGroup.Item>
