@@ -2,11 +2,12 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 import Product from "../components/Product";
 import { useGetProductsQuery } from "../slices/productsApiSlice";
+import Loader from "../components/loader/Loader";
 
 function HomeScreen() {
   const { data: products, isLoading, isError, error } = useGetProductsQuery();
 
-  if (isLoading) return <h2>Losding...</h2>;
+  if (isLoading) return <Loader />;
   if (isError) return <div>{error?.data?.message || error?.error}</div>;
 
   return (

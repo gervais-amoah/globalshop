@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { useGetProductDetailsQuery } from "../slices/productsApiSlice";
 
 import Rating from "../components/Rating";
+import Loader from "../components/loader/Loader";
 
 function ProductScreen() {
   const { id: productId } = useParams();
@@ -14,7 +15,7 @@ function ProductScreen() {
     error,
   } = useGetProductDetailsQuery(productId);
 
-  if (isLoading) return <h2>Losding...</h2>;
+  if (isLoading) return <Loader />;
   if (isError) return <div>{error?.data?.message || error?.error}</div>;
   if (!product) return <p>Opps, the product does not exist (anymore?)</p>;
 
