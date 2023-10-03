@@ -3,6 +3,7 @@ import { Button, Card, Col, Image, ListGroup, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { useGetProductDetailsQuery } from "../slices/productsApiSlice";
 
+import Message from "../components/Message";
 import Rating from "../components/Rating";
 import Loader from "../components/loader/Loader";
 
@@ -16,8 +17,12 @@ function ProductScreen() {
   } = useGetProductDetailsQuery(productId);
 
   if (isLoading) return <Loader />;
-  if (isError) return <div>{error?.data?.message || error?.error}</div>;
-  if (!product) return <p>Opps, the product does not exist (anymore?)</p>;
+  if (isError)
+    return (
+      <Message variant="danger">{error?.data?.message || error?.error}</Message>
+    );
+  if (!product)
+    return <Message>Opps, the product does not exist (anymore?)</Message>;
 
   return (
     <>
