@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import express from "express";
-import products from "./data/products.js";
+import productRoutes from "./routes/productRoutes.js";
 import connectDB from "./config/db.js";
 
 dotenv.config();
@@ -15,15 +15,6 @@ app.get("/", (req, res) => {
   res.send("API is up and running...");
 });
 
-app.get("/api/products", (req, res) => {
-  res.json(products);
-});
-
-app.get("/api/products/:id", (req, res) => {
-  const { id: productId } = req.params;
-  const product = products.find((p) => p._id === productId);
-  if (!product) res.status(404).send("Product not found");
-  res.json(product);
-});
+app.use("/api/products", productRoutes);
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
