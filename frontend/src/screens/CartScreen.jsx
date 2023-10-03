@@ -30,6 +30,10 @@ function CartScreen() {
     dispatch(removeFromCart(id));
   }
 
+  function checkoutHandler() {
+    navigate("/login?redirect=/shipping");
+  }
+
   return (
     <Row>
       <Col md={8}>
@@ -98,7 +102,12 @@ function CartScreen() {
                 .toFixed(2)}
             </ListGroup.Item>
             <ListGroup.Item>
-              <Button type="button" className="btn-block" disabled={!itemsQty}>
+              <Button
+                type="button"
+                className="btn-block"
+                disabled={!itemsQty}
+                onClick={checkoutHandler}
+              >
                 Proceed to Checkout
               </Button>
             </ListGroup.Item>
