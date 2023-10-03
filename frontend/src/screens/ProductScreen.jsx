@@ -11,6 +11,7 @@ import {
 import { Link, useParams } from "react-router-dom";
 import { useGetProductDetailsQuery } from "../slices/productsApiSlice";
 import { addToCart } from "../slices/cartSlice";
+import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 
 import Message from "../components/Message";
@@ -32,6 +33,7 @@ function ProductScreen() {
 
   function addToCartHandler() {
     dispatch(addToCart({ ...product, qty }));
+    toast.success("Product added", { closeOnClick: true, autoClose: 2000 });
   }
 
   if (isLoading) return <Loader />;

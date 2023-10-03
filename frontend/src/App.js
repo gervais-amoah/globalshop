@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import { ToastContainer } from "react-toastify";
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
         <Container>
           <Outlet />
         </Container>
+        <ToastContainer />
       </main>
       <Footer />
     </>
