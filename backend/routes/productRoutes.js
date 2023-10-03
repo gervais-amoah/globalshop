@@ -16,15 +16,19 @@ router.get(
   "/:id",
   asyncHandler(async (req, res) => {
     const { id: productId } = req.params;
-    if (productId.match(/^[0-9a-fA-F]{24}$/)) {
-      // Yes, it's a valid ObjectId, proceed with `findById` call.
-      const product = await Product.findById(productId);
-      if (!product)
-        return res.status(404).json({ message: "Product not found" });
-      res.json(product);
-    } else {
-      res.status(404).json({ message: "Product not found" });
+
+    const product = await Product.findById(productId);
+    if (!product) {
+      res.status(404);
+      throw new Error("Product not found");
     }
+    res.json(product);
+
+    // if (productId.match(/^[0-9a-fA-F]{24}$/)) {
+    //   // Yes, it's a valid ObjectId, proceed with `findById` call.
+    // } else {
+    //   res.status(404).json({ message: "Product not found" });
+    // }
   })
 );
 
