@@ -1,24 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Button, Card, Col, Image, ListGroup, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
-import axios from "axios";
+import { useGetProductDetailsQuery } from "../slices/productsApiSlice";
 
 import Rating from "../components/Rating";
 
 function ProductScreen() {
   const { id: productId } = useParams();
-  const [product, setProduct] = useState(null);
+  const {
+    data: product,
+    isLoading,
+    isError,
+    error,
+  } = useGetProductDetailsQuery(productId);
 
-  useEffect(() => {
-    const fecthProductData = async () => {
-      const { data } = await axios.get(`/api/products/${productId}`);
-      if (data) setProduct(data);
-    };
-
-    fecthProductData();
-  }, [productId]);
-
-  if (!product) return <p>Opps, it does not exist</p>;
+  if (isLoading) return <h2>Losding...</h2>;
+  if (isError) return <div>{error?.data?.message || error?.error}</div>;
+  if (!product) return <p>Opps, the product does not exist (anymore?)</p>;
 
   return (
     <>
