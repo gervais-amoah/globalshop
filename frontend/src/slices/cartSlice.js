@@ -13,11 +13,13 @@ const cartSlice = createSlice({
     //...
     addToCart: (state, action) => {
       const item = action.payload;
-      const existItem = state.cartItems.find((x) => x._if === item._id);
+      const existItem = state.cartItems.find((x) => x._id === item._id);
 
       if (existItem) {
         state.cartItems = state.cartItems.map((x) =>
-          x._id === existItem._id ? item : x
+          x._id === existItem._id
+            ? { ...item, qty: item.qty + existItem.qty }
+            : x
         );
       } else {
         state.cartItems = [...state.cartItems, item];
@@ -43,8 +45,13 @@ const cartSlice = createSlice({
         Number(state.taxPrice)
       ).toFixed(2);
 
+      //  total items qty calculation
+      state.itemsQty = state.cartItems.reduce((acc, item) => acc + item.qty, 0);
+
       //  save to local storage
       localStorage.setItem("cart", JSON.stringify(state));
+
+      //  TODO notify the user
     },
   },
 });
