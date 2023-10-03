@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { updateCart } from "../utils/cartUtils";
+import { updateCart, updateItemQty } from "../utils/cartUtils";
 
 const initialState = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart"))
@@ -15,11 +15,14 @@ const cartSlice = createSlice({
       const existItem = state.cartItems.find((x) => x._id === item._id);
 
       if (existItem) {
-        state.cartItems = state.cartItems.map((x) =>
-          x._id === existItem._id
-            ? { ...item, qty: item.qty + existItem.qty }
-            : x
-        );
+        // Store the override flag
+        const shouldOverride = item.override;
+
+        // Remove the override field from the item
+        delete item.override;
+
+        // Update the item quantity
+        state.cartItems = updateItemQty(state.cartItems, item, shouldOverride);
       } else {
         state.cartItems = [...state.cartItems, item];
       }

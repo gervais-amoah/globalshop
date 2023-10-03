@@ -1,5 +1,17 @@
 const addDecimals = (num) => (Math.round(num * 100) / 100).toFixed(2);
 
+const updateItemQty = (cartItems, updatedItem, shouldOverride) => {
+  console.log("overriding?", shouldOverride);
+  return cartItems.map((item) =>
+    item._id === updatedItem._id
+      ? {
+          ...item,
+          qty: shouldOverride ? updatedItem.qty : item.qty + updatedItem.qty,
+        }
+      : item
+  );
+};
+
 function updateCart(state) {
   //  items price calculation
   state.itemsPrice = addDecimals(
@@ -28,4 +40,4 @@ function updateCart(state) {
   return state;
 }
 
-export { updateCart };
+export { updateCart, updateItemQty };

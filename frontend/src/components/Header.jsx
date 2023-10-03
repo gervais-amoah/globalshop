@@ -1,5 +1,6 @@
 import React from "react";
 import { Navbar, Nav, Container, Badge } from "react-bootstrap";
+
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";

@@ -8,7 +8,7 @@ import {
   ListGroup,
   Row,
 } from "react-bootstrap";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useGetProductDetailsQuery } from "../slices/productsApiSlice";
 import { addToCart } from "../slices/cartSlice";
 import { useDispatch } from "react-redux";
@@ -22,7 +22,6 @@ function ProductScreen() {
   const [qty, setQty] = useState(1);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const {
     data: product,
@@ -33,7 +32,6 @@ function ProductScreen() {
 
   function addToCartHandler() {
     dispatch(addToCart({ ...product, qty }));
-    // navigate('/cart')
   }
 
   if (isLoading) return <Loader />;

@@ -22,6 +22,9 @@ main {
   text-overflow: ellipsis; /* Add ellipsis for long text */
   white-space: nowrap; /* Prevent wrapping */
 }
+.underlined {
+  text-decoration: underline;
+}
 
 .loader {
   position: absolute;
