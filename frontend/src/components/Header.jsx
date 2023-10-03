@@ -1,9 +1,12 @@
 import React from "react";
-import { Navbar, Nav, Container } from "react-bootstrap";
+import { Navbar, Nav, Container, Badge } from "react-bootstrap";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 
 function Header() {
+  const qty = useSelector((state) => state.cart?.itemsQty);
+
   return (
     <header>
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
@@ -17,7 +20,12 @@ function Header() {
             <Nav className="ms-auto">
               <LinkContainer to="/cart">
                 <Nav.Link>
-                  <FaShoppingCart /> Cart
+                  <FaShoppingCart /> Cart{" "}
+                  {qty && (
+                    <Badge pill bg="success">
+                      {qty}
+                    </Badge>
+                  )}
                 </Nav.Link>
               </LinkContainer>
 
