@@ -1,7 +1,6 @@
 main {
   min-height: calc(100vh - 100px);
 }
-
 .card-title {
   font-size: 1rem;
 }
@@ -24,6 +23,10 @@ main {
 }
 .underlined {
   text-decoration: underline;
+}
+.in-block {
+  display: inline-block;
+  width: fit-content;
 }
 
 .loader {
