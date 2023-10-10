@@ -3,6 +3,7 @@ import express from "express";
 import connectDB from "./config/db.js";
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import cookieParser from "cookie-parser";
 
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 
@@ -14,8 +15,12 @@ connectDB(); //  connect to mongoDB
 
 const app = express();
 
+//  Request body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+//  Cookie parser middleware
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.send("API is up and running...");
