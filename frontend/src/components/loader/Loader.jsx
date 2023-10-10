@@ -3,8 +3,10 @@ import loadingImg from "./loading.gif";
 
 function Loader() {
   return (
-    <div className="loader">
-      <img src={loadingImg} alt="Loading Animation" />
+    <div className="loader-wrap">
+      <div className="loader">
+        <img src={loadingImg} alt="Loading Animation" />
+      </div>
     </div>
   );
 }

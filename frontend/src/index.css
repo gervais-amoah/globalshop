@@ -29,6 +29,14 @@ main {
   width: fit-content;
 }
 
+.loader-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+}
 .loader {
   position: absolute;
   width: 400px;
