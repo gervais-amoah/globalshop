@@ -1,11 +1,11 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
 import "react-toastify/dist/ReactToastify.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./reset.css";
+import App from "./App";
 import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+import "./reset.css";
 
 import {
   createBrowserRouter,
@@ -17,9 +17,10 @@ import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
 
 import { Provider } from "react-redux";
-import store from "./store";
 import CartScreen from "./screens/CartScreen";
 import LoginScreen from "./screens/LoginScreen";
+import RegisterScreen from "./screens/RegisterScreen";
+import store from "./store";
 
 const route = createBrowserRouter(
   createRoutesFromElements(
@@ -27,6 +28,7 @@ const route = createBrowserRouter(
       <Route index={true} path="/" element={<HomeScreen />} />
       <Route path="/product/:id" element={<ProductScreen />} />
       <Route path="/cart" element={<CartScreen />} />
+      <Route path="/register" element={<RegisterScreen />} />
       <Route path="/login" element={<LoginScreen />} />
     </Route>
   )

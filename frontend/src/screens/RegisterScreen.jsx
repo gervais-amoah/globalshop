@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form, Row } from "react-bootstrap";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import FormContainer from "../components/FormContainer";
-import { useLoginMutation } from "../slices/usersApiSlice";
-import { setCredentials } from "../slices/authSlice";
-import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import FormContainer from "../components/FormContainer";
 import Loader from "../components/loader/Loader";
+import { setCredentials } from "../slices/authSlice";
+import { useRegisterMutation } from "../slices/usersApiSlice";
 
-function LoginScreen() {
+function RegisterScreen() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [login, { isLoading }] = useLoginMutation();
+  const [register, { isLoading }] = useRegisterMutation();
 
   const { userInfo } = useSelector((state) => state.auth);
 
@@ -29,8 +31,12 @@ function LoginScreen() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    if (password !== confirmPassword)
+      return toast.error("Passwords do not match");
+
     try {
-      const res = await login({ email, password }).unwrap();
+      const res = await register({ name, email, password }).unwrap();
       dispatch(setCredentials({ ...res }));
 
       navigate(redirect);
@@ -41,15 +47,27 @@ function LoginScreen() {
 
   return (
     <FormContainer>
-      <h1>Sign In</h1>
+      <h1>Register</h1>
 
       <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="email" className="my-3">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter name"
+            value={name}
+            required
+            onChange={(e) => setName(e.target.value)}
+          />
+        </Form.Group>
+
         <Form.Group controlId="email" className="my-3">
           <Form.Label>Email Addresse</Form.Label>
           <Form.Control
             type="email"
             placeholder="Enter email"
             value={email}
+            required
             onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Group>
@@ -60,7 +78,19 @@ function LoginScreen() {
             type="password"
             placeholder="Enter password"
             value={password}
+            required
             onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Group>
+
+        <Form.Group controlId="confPassword" className="my-3">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Confirm password"
+            value={confirmPassword}
+            required
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </Form.Group>
 
@@ -77,16 +107,16 @@ function LoginScreen() {
       </Form>
 
       <Row className="py-3">
-        New Customer ?
+        Already have an account ?
         <Link
-          to={redirect ? `/register?redirect=${redirect}` : "/register"}
+          to={redirect ? `/login?redirect=${redirect}` : "/login"}
           className="in-block underlined"
         >
-          Register
+          Login
         </Link>
       </Row>
     </FormContainer>
   );
 }
 
-export default LoginScreen;
+export default RegisterScreen;
