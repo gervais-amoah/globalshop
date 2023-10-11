@@ -26,7 +26,6 @@ function PlaceOrderScreen() {
   }, [cart.paymentMethod, cart.shippingAddress?.address, navigate]);
 
   async function handlePlaceOrder(evt) {
-    console.log(cart.cartItems);
     try {
       const res = await createOrder({
         orderItems: cart.cartItems,
