@@ -1,14 +1,13 @@
 import React from "react";
-import { LinkContainer } from "react-router-bootstrap";
-import { Table, Button } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import { FaTimes } from "react-icons/fa";
+import { LinkContainer } from "react-router-bootstrap";
 import Message from "../components/Message";
 import Loader from "../components/loader/Loader";
 import { useGetAllOrdersQuery } from "../slices/ordersApiSlice";
 
 function OrderListScreen() {
   const { data: orders, isLoading, error } = useGetAllOrdersQuery();
-  console.log(orders);
 
   if (error) {
     console.error(error);
