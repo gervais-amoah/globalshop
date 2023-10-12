@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Card, Col, Image, ListGroup, Row } from "react-bootstrap";
+import { Button, Card, Col, Image, ListGroup, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Message from "../components/Message";
@@ -8,6 +8,7 @@ import {
   useGetOrderDetailsQuery,
   useGetPayPalClientIdQuery,
   usePayOrderMutation,
+  useDeliverOrderMutation,
 } from "../slices/ordersApiSlice";
 
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
@@ -31,6 +32,8 @@ function OrderScreen() {
   } = useGetPayPalClientIdQuery();
 
   const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation();
+  const [deliverOrder, { isLoading: loadingDeliver }] =
+    useDeliverOrderMutation();
   const [{ isPending }, paypalDisplatcher] = usePayPalScriptReducer();
 
   useEffect(() => {
@@ -56,7 +59,7 @@ function OrderScreen() {
     }
   }, [errorPayPal, loadingPayPal, order, paypal?.clientId, paypalDisplatcher]);
 
-  // FUNCTIONS
+  // FUNCTIONS FROM HERE
   function onApprove(data, actions) {
     return actions.order.capture().then(async function (details) {
       try {
@@ -95,6 +98,19 @@ function OrderScreen() {
       .then((orderId) => orderId);
   }
 
+  async function onDeliverOrder() {
+    try {
+      await deliverOrder(orderId);
+      refetch();
+      toast.success("Order delivered");
+    } catch (err) {
+      console.error(err);
+      toast.error(err?.data?.message || err.message);
+    }
+  }
+
+  // REDERING FROM HERE
+
   if (error) {
     console.error(error);
 
@@ -125,7 +141,7 @@ function OrderScreen() {
               </p>
               {order.isDelivered ? (
                 <Message variant="success">
-                  Delivered on {order.deliveredAt}
+                  Delivered on {order.deliveredAt.substring(0, 10)}
                 </Message>
               ) : (
                 <Message variant="danger">Not Delivered</Message>
@@ -139,7 +155,9 @@ function OrderScreen() {
                 {order.paymentMethod}
               </p>
               {order.isPaid ? (
-                <Message variant="success">Paid on {order.paidAt}</Message>
+                <Message variant="success">
+                  Paid on {order.paidAt.substring(0, 10)}
+                </Message>
               ) : (
                 <Message variant="danger">Not Paid</Message>
               )}
@@ -212,7 +230,7 @@ function OrderScreen() {
                 <ListGroup.Item>
                   {/* {loadingPay && <Loader />} */}
 
-                  {isPending || loadingPay ? (
+                  {isPending || loadingPay || loadingDeliver ? (
                     <Loader />
                   ) : (
                     <>
@@ -232,6 +250,20 @@ function OrderScreen() {
                   )}
                 </ListGroup.Item>
               )}
+
+              {userInfo &&
+                userInfo.isAdmin &&
+                order.isPaid &&
+                !order.isDelivered && (
+                  <ListGroup.Item>
+                    <Button
+                      style={{ marginBottom: "10px" }}
+                      onClick={onDeliverOrder}
+                    >
+                      Deliver Order
+                    </Button>
+                  </ListGroup.Item>
+                )}
             </ListGroup>
           </Card>
         </Col>
