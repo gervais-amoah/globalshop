@@ -232,10 +232,6 @@ function OrderScreen() {
                   )}
                 </ListGroup.Item>
               )}
-
-              {/* TODO: Amin */}
-              {/* PAY ORDER PLACEHOLDER */}
-              {/* MARK AS DELIVERED PLACEHOLDER */}
             </ListGroup>
           </Card>
         </Col>
