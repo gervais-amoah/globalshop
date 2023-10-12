@@ -36,6 +36,7 @@ main {
   width: 100vw;
   height: 100vh;
   background-color: white;
+  z-index: 101;
 }
 .loader {
   position: absolute;
