@@ -1,22 +1,14 @@
 import React, { useEffect } from "react";
+import { Card, Col, Image, ListGroup, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
-import {
-  Row,
-  Col,
-  ListGroup,
-  Image,
-  Form,
-  Button,
-  Card,
-} from "react-bootstrap";
 import { toast } from "react-toastify";
-import {
-  useGetOrderDetailsQuery,
-  usePayOrderMutation,
-  useGetPayPalClientIdQuery,
-} from "../slices/ordersApiSlice";
 import Message from "../components/Message";
 import Loader from "../components/loader/Loader";
+import {
+  useGetOrderDetailsQuery,
+  useGetPayPalClientIdQuery,
+  usePayOrderMutation,
+} from "../slices/ordersApiSlice";
 
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import { useSelector } from "react-redux";
@@ -218,9 +210,9 @@ function OrderScreen() {
 
               {!order.isPaid && (
                 <ListGroup.Item>
-                  {loadingPay && <Loader />}
+                  {/* {loadingPay && <Loader />} */}
 
-                  {isPending ? (
+                  {isPending || loadingPay ? (
                     <Loader />
                   ) : (
                     <>
