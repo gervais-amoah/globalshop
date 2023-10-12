@@ -42,7 +42,7 @@ function OrderScreen() {
   const [{ isPending }, paypalDisplatcher] = usePayPalScriptReducer();
 
   useEffect(() => {
-    if (!errorPayPal && !loadingPayPal && paypal.clientId) {
+    if (!errorPayPal && !loadingPayPal && paypal?.clientId) {
       const loadPayPalScript = async () => {
         paypalDisplatcher({
           type: "resetOptions",
@@ -62,7 +62,46 @@ function OrderScreen() {
         if (!window.paypal) loadPayPalScript();
       }
     }
-  }, [errorPayPal, loadingPayPal, order, paypal.clientId, paypalDisplatcher]);
+  }, [errorPayPal, loadingPayPal, order, paypal?.clientId, paypalDisplatcher]);
+
+  // FUNCTIONS
+  function onApprove(data, actions) {
+    return actions.order.capture().then(async function (details) {
+      try {
+        await payOrder({ orderId, details });
+        refetch();
+        toast.success("Payment successful");
+      } catch (err) {
+        console.error(err);
+        toast.error(err?.data?.message || err.message);
+      }
+    });
+  }
+
+  async function onApproveTest() {
+    await payOrder({ orderId, details: { payer: {} } });
+    refetch();
+    toast.success("Payment successful");
+  }
+
+  function onError(err) {
+    console.error(err);
+    toast.error(err?.data?.message || err.message);
+  }
+
+  function createOrder(data, actions) {
+    return actions.order
+      .create({
+        purchase_units: [
+          {
+            amount: {
+              value: order.totalPrice,
+            },
+          },
+        ],
+      })
+      .then((orderId) => orderId);
+  }
 
   if (error) {
     console.error(error);
@@ -176,6 +215,31 @@ function OrderScreen() {
                   <Col>${order.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
+
+              {!order.isPaid && (
+                <ListGroup.Item>
+                  {loadingPay && <Loader />}
+
+                  {isPending ? (
+                    <Loader />
+                  ) : (
+                    <>
+                      {/* <Button
+                        style={{ marginBottom: "10px" }}
+                        onClick={onApproveTest}
+                      >
+                        Test Pay Order
+                      </Button> */}
+
+                      <PayPalButtons
+                        createOrder={createOrder}
+                        onApprove={onApprove}
+                        onError={onError}
+                      />
+                    </>
+                  )}
+                </ListGroup.Item>
+              )}
 
               {/* TODO: Amin */}
               {/* PAY ORDER PLACEHOLDER */}
