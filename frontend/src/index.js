@@ -30,7 +30,7 @@ import ShippingScreen from "./screens/ShippingScreen";
 import store from "./store";
 import ProfileScreen from "./screens/ProfileScreen";
 import AdminRoute from "./components/PrivateRoute copy";
-import OrderListScreen from "./screens/OrderListScreen";
+import OrderListScreen from "./screens/admin/OrderListScreen";
 import ProductListScreen from "./screens/ProductListScreen";
 import ProductEditScreen from "./screens/admin/ProductEditScreen";
 import UserListScreen from "./screens/admin/UserListScreen";

@@ -2,10 +2,10 @@ import React from "react";
 import { Button, Table } from "react-bootstrap";
 import { FaTimes } from "react-icons/fa";
 import { LinkContainer } from "react-router-bootstrap";
-import Message from "../components/Message";
-import Loader from "../components/loader/Loader";
-import { useGetAllOrdersQuery } from "../slices/ordersApiSlice";
-import { shortenString } from "../utils/tableUtils";
+import Message from "../../components/Message";
+import Loader from "../../components/loader/Loader";
+import { useGetAllOrdersQuery } from "../../slices/ordersApiSlice";
+import { shortenString } from "../../utils/tableUtils";
 
 function OrderListScreen() {
   const { data: orders, isLoading, error } = useGetAllOrdersQuery();
