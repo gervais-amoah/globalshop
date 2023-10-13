@@ -4,14 +4,37 @@ import { FaEdit, FaPlus, FaTrash } from "react-icons/fa";
 import { LinkContainer } from "react-router-bootstrap";
 import Message from "../components/Message";
 import Loader from "../components/loader/Loader";
-import { useGetAllProductsQuery } from "../slices/productsApiSlice";
+import {
+  useGetAllProductsQuery,
+  useCreateProductMutation,
+} from "../slices/productsApiSlice";
+import { toast } from "react-toastify";
 
 function ProductListScreen() {
-  const { data: products, isLoading, error } = useGetAllProductsQuery();
+  const {
+    data: products,
+    isLoading,
+    error,
+    refetch,
+  } = useGetAllProductsQuery();
+
+  const [createProduct, { isLoading: loadingCreating, error: errorCreation }] =
+    useCreateProductMutation();
 
   // FUNCTIONS
   function handleDelete(id) {
     console.log("delete", id);
+  }
+  async function handleCreation() {
+    if (window.confirm("Do you want to create a new product ?")) {
+      try {
+        await createProduct();
+        refetch();
+      } catch (err) {
+        console.error(err);
+        toast.error(err.data?.message || err.error || err.message);
+      }
+    }
   }
 
   // RENDERING
@@ -34,11 +57,15 @@ function ProductListScreen() {
           <h1>Products</h1>
         </Col>
 
-        <Col className="text-end">
-          <Button className="btn-sm m-3 btn-add">
-            <FaPlus style={{ margin: "0 0 3px 6px;" }} />
-            New Product
-          </Button>
+        <Col className="text-end p-3">
+          {loadingCreating ? (
+            <>Creating sample product...</>
+          ) : (
+            <Button className="btn-sm btn-add" onClick={handleCreation}>
+              <FaPlus style={{ margin: "0 0 3px 6px;" }} />
+              New Product
+            </Button>
+          )}
         </Col>
       </Row>
       <Table striped hover responsive className="table-sm">
