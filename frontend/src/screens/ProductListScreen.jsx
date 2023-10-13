@@ -62,7 +62,7 @@ function ProductListScreen() {
             <>Creating sample product...</>
           ) : (
             <Button className="btn-sm btn-add" onClick={handleCreation}>
-              <FaPlus style={{ margin: "0 0 3px 6px;" }} />
+              <FaPlus style={{ margin: "0 0 3px 6px" }} />
               New Product
             </Button>
           )}
@@ -85,11 +85,11 @@ function ProductListScreen() {
             <tr key={product._id}>
               <td>{product._id}</td>
               <td>{product.name}</td>
-              <td>{product.price}</td>
+              <td>${product.price}</td>
               <td>{product.category}</td>
               <td>{product.brand}</td>
               <td>
-                <LinkContainer to={`/admin/product/${product._id}`}>
+                <LinkContainer to={`/admin/product/${product._id}/edit`}>
                   <Button className="btn-sm mx-2" variant="warning">
                     <FaEdit color="white" />
                   </Button>
