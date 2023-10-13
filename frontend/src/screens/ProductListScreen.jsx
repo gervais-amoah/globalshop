@@ -83,7 +83,7 @@ function ProductListScreen() {
         <tbody>
           {products?.map((product) => (
             <tr key={product._id}>
-              <td>{product._id}</td>
+              <td>{product._id.substring(0, 20)}</td>
               <td>{product.name}</td>
               <td>${product.price}</td>
               <td>{product.category}</td>
