@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 function UserListScreen() {
   const { data: users, isLoading, error, refetch } = useGetUsersQuery();
 
-  const [deleteUser, { isLoading: loadingDelete, error: errorDelete }] =
+  const [deleteUser, { isLoading: isDeleting, error: errorDelete }] =
     useDeleteUserMutation();
 
   async function handleDelete(id) {
