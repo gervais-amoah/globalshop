@@ -47,7 +47,12 @@ main {
   top: 50%;
   transform: translate(-50%, -50%);
 }
-.loader img {
+.loader__small {
+  width: 40px;
+  height: 40px;
+}
+.loader img,
+.loader__small img {
   width: 100%;
   height: auto;
   object-fit: contain;
