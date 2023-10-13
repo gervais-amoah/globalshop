@@ -10,6 +10,7 @@ import {
   useDeleteProductMutation,
 } from "../slices/productsApiSlice";
 import { toast } from "react-toastify";
+import { shortenString } from "../utils/tableUtils";
 
 function ProductListScreen() {
   const {
@@ -96,8 +97,8 @@ function ProductListScreen() {
         <tbody>
           {products?.map((product) => (
             <tr key={product._id}>
-              <td>{product._id.substring(0, 20)}</td>
-              <td>{product.name}</td>
+              <td>{shortenString(product._id)}</td>
+              <td>{shortenString(product.name, 30)}</td>
               <td>${product.price}</td>
               <td>{product.category}</td>
               <td>{product.brand}</td>

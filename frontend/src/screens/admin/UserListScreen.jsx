@@ -10,6 +10,8 @@ import Message from "../../components/Message";
 import Loader from "../../components/loader/Loader";
 import { toast } from "react-toastify";
 
+import { shortenString } from "../../utils/tableUtils";
+
 function UserListScreen() {
   const { data: users, isLoading, error, refetch } = useGetUsersQuery();
 
@@ -58,8 +60,8 @@ function UserListScreen() {
         <tbody>
           {users?.map((user) => (
             <tr key={user._id}>
-              <td>{user._id}</td>
-              <td>{user.name}</td>
+              <td>{shortenString(user._id)}</td>
+              <td>{shortenString(user.name)}</td>
               <td>
                 {" "}
                 <a href={`mailto:${user.email}`}>{user.email}</a>{" "}

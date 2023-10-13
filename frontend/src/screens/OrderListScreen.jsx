@@ -5,6 +5,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import Message from "../components/Message";
 import Loader from "../components/loader/Loader";
 import { useGetAllOrdersQuery } from "../slices/ordersApiSlice";
+import { shortenString } from "../utils/tableUtils";
 
 function OrderListScreen() {
   const { data: orders, isLoading, error } = useGetAllOrdersQuery();
@@ -39,7 +40,7 @@ function OrderListScreen() {
         <tbody>
           {orders?.map((order) => (
             <tr key={order._id}>
-              <td>{order._id}</td>
+              <td>{shortenString(order._id)}</td>
               <td>{order.user.name}</td>
               <td>{order.createdAt.substring(0, 10)}</td>
               <td>${order.totalPrice}</td>
