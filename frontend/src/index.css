@@ -52,3 +52,7 @@ main {
   height: auto;
   object-fit: contain;
 }
+
+.btn-add svg {
+  margin: 0 3px 3px 0;
+}
