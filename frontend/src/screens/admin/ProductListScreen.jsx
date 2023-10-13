@@ -2,15 +2,15 @@ import React from "react";
 import { Button, Col, Row, Table } from "react-bootstrap";
 import { FaEdit, FaPlus, FaTrash } from "react-icons/fa";
 import { LinkContainer } from "react-router-bootstrap";
-import Message from "../components/Message";
-import Loader from "../components/loader/Loader";
+import Message from "../../components/Message";
+import Loader from "../../components/loader/Loader";
 import {
   useGetAllProductsQuery,
   useCreateProductMutation,
   useDeleteProductMutation,
-} from "../slices/productsApiSlice";
+} from "../../slices/productsApiSlice";
 import { toast } from "react-toastify";
-import { shortenString } from "../utils/tableUtils";
+import { shortenString } from "../../utils/tableUtils";
 
 function ProductListScreen() {
   const {

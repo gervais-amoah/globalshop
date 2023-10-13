@@ -31,7 +31,7 @@ import store from "./store";
 import ProfileScreen from "./screens/ProfileScreen";
 import AdminRoute from "./components/PrivateRoute copy";
 import OrderListScreen from "./screens/admin/OrderListScreen";
-import ProductListScreen from "./screens/ProductListScreen";
+import ProductListScreen from "./screens/admin/ProductListScreen";
 import ProductEditScreen from "./screens/admin/ProductEditScreen";
 import UserListScreen from "./screens/admin/UserListScreen";
 import UserEditScreen from "./screens/admin/UserEditScreen";
