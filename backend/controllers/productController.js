@@ -89,9 +89,6 @@ const createProductReview = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
   const { rating, comment } = req.body;
 
-  console.log("req.body is:", req.body);
-  console.log("req.user is:", req.user);
-
   if (!product) {
     res.status(404);
     throw new Error("Product not found");

@@ -60,8 +60,6 @@ function ProductScreen() {
         res.error?.data?.message ||
         "Something went wrong. Please try again later";
 
-      console.log(res);
-
       if (res.status === 400 || res.error) {
         console.error(errorMessage);
         toast.error(errorMessage);
