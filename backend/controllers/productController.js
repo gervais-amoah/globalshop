@@ -86,9 +86,12 @@ const deleteProduct = asyncHandler(async (req, res) => {
 //  @route  POST /api/products
 //  @access Private/Admin
 const createProductReview = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id);
   const { rating, comment } = req.body;
 
-  const product = await Product.findById(req.params.id);
+  console.log("req.body is:", req.body);
+  console.log("req.user is:", req.user);
+
   if (!product) {
     res.status(404);
     throw new Error("Product not found");
@@ -99,7 +102,7 @@ const createProductReview = asyncHandler(async (req, res) => {
 
     if (alreadyReviewed) {
       res.status(400);
-      throw new Error("Product already reviewed by you");
+      throw new Error("You cannot reviewed the same product twice");
     }
 
     const review = {
