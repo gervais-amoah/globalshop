@@ -180,7 +180,8 @@ export default function ProductEditScreen() {
           <Form.Group controlId="description" className="my-4">
             <Form.Label>Description</Form.Label>
             <Form.Control
-              as={"textarea"}
+              as="textarea"
+              rows="3"
               type="text"
               placeholder="Enter description"
               value={description}
