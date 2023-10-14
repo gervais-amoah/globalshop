@@ -1,0 +1,77 @@
+main {
+  min-height: calc(100vh - 100px);
+}
+.card-title {
+  font-size: 1rem;
+}
+.card-text {
+  font-size: 0.8rem;
+}
+.review button {
+  margin-bottom: 10px;
+}
+.rating span {
+  color: goldenrod;
+}
+.rating-text {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding-left: 0.5rem;
+}
+.product-title {
+  height: 1.5em; /* Set a fixed height */
+  overflow: hidden; /* Hide overflow content */
+  text-overflow: ellipsis; /* Add ellipsis for long text */
+  white-space: nowrap; /* Prevent wrapping */
+}
+.underlined {
+  text-decoration: underline;
+}
+.in-block {
+  display: inline-block;
+  width: fit-content;
+}
+
+.loader-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  z-index: 101;
+}
+.loader {
+  position: absolute;
+  width: 400px;
+  max-width: 100%;
+  margin: 0 auto;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.loader__small {
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+}
+.loader img,
+.loader__small img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.btn-add svg {
+  margin: 0 3px 3px 0;
+}
+
+.carousel-caption {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
