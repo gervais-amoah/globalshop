@@ -1,15 +1,16 @@
 import React from "react";
 import { Button, Table } from "react-bootstrap";
-import { FaCheck, FaEdit, FaEye, FaTimes, FaTrash } from "react-icons/fa";
+import { FaCheck, FaEdit, FaTimes, FaTrash } from "react-icons/fa";
 import { LinkContainer } from "react-router-bootstrap";
+import { toast } from "react-toastify";
+import Message from "../../components/Message";
+import Loader from "../../components/loader/Loader";
 import {
   useDeleteUserMutation,
   useGetUsersQuery,
 } from "../../slices/usersApiSlice";
-import Message from "../../components/Message";
-import Loader from "../../components/loader/Loader";
-import { toast } from "react-toastify";
 
+import SmallLoader from "../../components/loader/SmallLoader";
 import { shortenString } from "../../utils/tableUtils";
 
 function UserListScreen() {
@@ -25,7 +26,12 @@ function UserListScreen() {
         refetch();
         toast.success(res?.data?.message);
       } catch (err) {
-        toast.error(err.message || err.error || err.data?.error);
+        toast.error(
+          err.message ||
+            err.error ||
+            err.data?.error ||
+            errorDelete.error?.data?.message
+        );
       }
     }
   }
@@ -76,21 +82,26 @@ function UserListScreen() {
                 )}
               </td>
               <td>
-                <LinkContainer to={`/admin/user/${user._id}/edit`}>
-                  <Button className="btn-sm mx-2" variant="warning">
-                    <FaEdit color="white" />
-                  </Button>
-                </LinkContainer>
-                {/* TODO Add small loader here */}
+                {isDeleting ? (
+                  <SmallLoader />
+                ) : (
+                  <>
+                    <LinkContainer to={`/admin/user/${user._id}/edit`}>
+                      <Button className="btn-sm mx-2" variant="warning">
+                        <FaEdit color="white" />
+                      </Button>
+                    </LinkContainer>
 
-                {!user.isAdmin && (
-                  <Button
-                    className="btn-sm"
-                    variant={user.isAdmin ? "secondary" : "danger"}
-                    onClick={() => handleDelete(user._id)}
-                  >
-                    <FaTrash />
-                  </Button>
+                    {!user.isAdmin && (
+                      <Button
+                        className="btn-sm"
+                        variant={user.isAdmin ? "secondary" : "danger"}
+                        onClick={() => handleDelete(user._id)}
+                      >
+                        <FaTrash />
+                      </Button>
+                    )}
+                  </>
                 )}
               </td>
             </tr>

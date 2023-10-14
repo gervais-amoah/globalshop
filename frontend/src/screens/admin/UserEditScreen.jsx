@@ -10,6 +10,7 @@ import {
 import FormContainer from "../../components/FormContainer";
 import Loader from "../../components/loader/Loader";
 import Message from "../../components/Message";
+import SmallLoader from "../../components/loader/SmallLoader";
 
 const UserEditScreen = () => {
   const { id: userId } = useParams();
@@ -43,6 +44,12 @@ const UserEditScreen = () => {
       });
 
       if (res.error) {
+        if (res.error.status === 500) {
+          console.error(res.error);
+          toast.error("Something went wrong. Maybe the email already exists.");
+          throw new Error(res.data.message);
+        }
+
         console.error(res.error);
         toast.error(res.error);
         toast.error(res.error);
@@ -73,7 +80,6 @@ const UserEditScreen = () => {
       </Link>
       <FormContainer>
         <h1>Edit User</h1>
-        {isUpdating && <Loader />}
         {isLoading ? (
           <Loader />
         ) : error ? (
@@ -120,10 +126,13 @@ const UserEditScreen = () => {
                 onChange={(e) => setIsAdmin(e.target.checked)}
               ></Form.Check>
             </Form.Group>
-
-            <Button type="submit" variant="primary">
-              Update
-            </Button>
+            {isUpdating ? (
+              <SmallLoader />
+            ) : (
+              <Button type="submit" variant="primary">
+                Update
+              </Button>
+            )}
           </Form>
         )}
       </FormContainer>
