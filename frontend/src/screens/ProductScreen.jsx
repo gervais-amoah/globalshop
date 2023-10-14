@@ -21,6 +21,7 @@ import Message from "../components/Message";
 import Rating from "../components/Rating";
 import Loader from "../components/loader/Loader";
 import SmallLoader from "../components/loader/SmallLoader";
+import Meta from "../components/Meta";
 
 function ProductScreen() {
   const { id: productId } = useParams();
@@ -88,9 +89,11 @@ function ProductScreen() {
 
   return (
     <>
+      <Meta title={product.name} description={product.description} />
       <Link className="btn btn-light my-3" to={"/"}>
         Go Back
       </Link>
+
       <Row>
         <Col md={5}>
           <Image src={product.image} alt={product.name} fluid />

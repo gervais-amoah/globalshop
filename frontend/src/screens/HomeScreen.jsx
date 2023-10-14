@@ -7,6 +7,7 @@ import { useGetProductsQuery } from "../slices/productsApiSlice";
 import { Link, useParams } from "react-router-dom";
 import Paginate from "../components/Paginate";
 import ProductCarousel from "../components/ProductCarousel";
+import Meta from "../components/Meta";
 
 function HomeScreen() {
   const { keyword, pageNumber } = useParams();
@@ -30,6 +31,7 @@ function HomeScreen() {
       ) : (
         <ProductCarousel />
       )}
+      <Meta />
       <h1>Latest Products</h1>
       <Row>
         {!data.products.length ? (
