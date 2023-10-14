@@ -5,7 +5,7 @@ import Product from "../models/productModel.js";
 //  @route  GET /api/products
 //  @access Public
 const getProducts = asyncHandler(async (req, res) => {
-  const pageSize = 2;
+  const pageSize = 2; // 10
   const page = Number(req.query.pageNumber) || 1;
   const count = await Product.countDocuments();
 
@@ -26,6 +26,20 @@ const getProductById = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error("Product not found");
   }
+});
+
+//  @desc   Fetch all products
+//  @route  GET /api/products
+//  @access Public
+const adminGetProducts = asyncHandler(async (req, res) => {
+  const pageSize = 3; //  10
+  const page = Number(req.query.pageNumber) || 1;
+  const count = await Product.countDocuments();
+
+  const products = await Product.find({})
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+  res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
 //  @desc   Create a new product
@@ -132,5 +146,6 @@ export {
   createProduct,
   updateProduct,
   deleteProduct,
+  adminGetProducts,
   createProductReview,
 };

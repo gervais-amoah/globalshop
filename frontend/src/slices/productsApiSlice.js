@@ -21,8 +21,9 @@ export const productsApiSlice = apiSlice.injectEndpoints({
     }),
 
     getAllProducts: builder.query({
-      query: () => ({
-        url: PRODUCTS_URL,
+      query: ({ pageNumber }) => ({
+        url: PRODUCTS_URL + "/admin",
+        params: { pageNumber },
       }),
       keepUnusedDataFor: 10,
     }),

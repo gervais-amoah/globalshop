@@ -11,14 +11,18 @@ import {
 } from "../../slices/productsApiSlice";
 import { toast } from "react-toastify";
 import { shortenString } from "../../utils/tableUtils";
+import { useNavigate, useParams } from "react-router-dom";
+import Paginate from "../../components/Paginate";
+import SmallLoader from "../../components/loader/SmallLoader";
 
 function ProductListScreen() {
-  const {
-    data: products,
-    isLoading,
-    error,
-    refetch,
-  } = useGetAllProductsQuery();
+  const { pageNumber } = useParams();
+
+  const navigate = useNavigate();
+
+  const { data, isLoading, error, refetch } = useGetAllProductsQuery({
+    pageNumber,
+  });
 
   const [createProduct, { isLoading: loadingCreating, error: errorCreation }] =
     useCreateProductMutation();
@@ -31,10 +35,11 @@ function ProductListScreen() {
     if (window.confirm("Are you sure you want to delete the product ?")) {
       try {
         await deleteProduct(id);
+        navigate("/admin/productlist");
         refetch();
         toast.success("Product deleted");
       } catch (err) {
-        console.error(err);
+        console.error(err, errorDelete);
         toast.error(err.data?.message || err.error || err.message);
       }
     }
@@ -45,7 +50,7 @@ function ProductListScreen() {
         await createProduct();
         refetch();
       } catch (err) {
-        console.error(err);
+        console.error(err, errorCreation);
         toast.error(err.data?.message || err.error || err.message);
       }
     }
@@ -73,54 +78,72 @@ function ProductListScreen() {
 
         <Col className="text-end p-3">
           {loadingCreating ? (
-            <>Creating sample product...</>
+            <SmallLoader />
           ) : (
             <Button className="btn-sm btn-add" onClick={handleCreation}>
-              <FaPlus style={{ margin: "0 0 3px 6px" }} />
+              <FaPlus style={{ margin: "0 6px 3px 0" }} />
               New Product
             </Button>
           )}
         </Col>
       </Row>
-      <Table striped hover responsive className="table-sm">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>NAME</th>
-            <th>PRICE</th>
-            <th>CATEGORY</th>
-            <th>BRAND</th>
-            <th></th>
-          </tr>
-        </thead>
+      {data.products?.length > 0 ? (
+        <>
+          <Table striped hover responsive className="table-sm">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>PRICE</th>
+                <th>CATEGORY</th>
+                <th>BRAND</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.products?.map((product) => (
+                <tr key={product._id}>
+                  <td>{shortenString(product._id)}</td>
+                  <td>{shortenString(product.name, 30)}</td>
+                  <td>${product.price}</td>
+                  <td>{product.category}</td>
+                  <td>{product.brand}</td>
+                  <td>
+                    {loadingDelete ? (
+                      <SmallLoader />
+                    ) : (
+                      <>
+                        <LinkContainer
+                          to={`/admin/product/${product._id}/edit`}
+                        >
+                          <Button className="btn-sm mx-2" variant="warning">
+                            <FaEdit color="white" />
+                          </Button>
+                        </LinkContainer>
 
-        <tbody>
-          {products?.map((product) => (
-            <tr key={product._id}>
-              <td>{shortenString(product._id)}</td>
-              <td>{shortenString(product.name, 30)}</td>
-              <td>${product.price}</td>
-              <td>{product.category}</td>
-              <td>{product.brand}</td>
-              <td>
-                <LinkContainer to={`/admin/product/${product._id}/edit`}>
-                  <Button className="btn-sm mx-2" variant="warning">
-                    <FaEdit color="white" />
-                  </Button>
-                </LinkContainer>
-                {/* TODO Add small loader here */}
-                <Button
-                  className="btn-sm"
-                  variant="danger"
-                  onClick={() => handleDelete(product._id)}
-                >
-                  <FaTrash />
-                </Button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+                        <Button
+                          className="btn-sm"
+                          variant="danger"
+                          onClick={() => handleDelete(product._id)}
+                        >
+                          <FaTrash />
+                        </Button>
+                      </>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+          {isLoading ? (
+            <SmallLoader />
+          ) : (
+            <Paginate isAdmin page={data.page} pages={data.pages} />
+          )}
+        </>
+      ) : (
+        <h2>No Products</h2>
+      )}
     </>
   );
 }
