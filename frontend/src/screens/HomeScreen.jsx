@@ -4,7 +4,7 @@ import Message from "../components/Message";
 import Product from "../components/Product";
 import Loader from "../components/loader/Loader";
 import { useGetProductsQuery } from "../slices/productsApiSlice";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Paginate from "../components/Paginate";
 
 function HomeScreen() {
@@ -22,6 +22,11 @@ function HomeScreen() {
 
   return (
     <>
+      {keyword && (
+        <Link to="/" className="btn btn-light my-3">
+          Go Back
+        </Link>
+      )}
       <h1>Latest Products</h1>
       <Row>
         {!data.products.length ? (
