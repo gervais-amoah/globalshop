@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
-import CheckoutSteps from "../../components/CheckoutSteps";
+import { Button, Card, Col, Image, ListGroup, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useCreateOrderMutation } from "../../slices/ordersApiSlice";
-import { clearCartItems } from "../../slices/cartSlice";
+import CheckoutSteps from "../../components/CheckoutSteps";
 import Message from "../../components/Message";
-import Loader from "../../components/loader/Loader";
+import SmallLoader from "../../components/loader/SmallLoader";
+import { clearCartItems } from "../../slices/cartSlice";
+import { useCreateOrderMutation } from "../../slices/ordersApiSlice";
 
 function PlaceOrderScreen() {
   const navigate = useNavigate();
@@ -15,7 +15,8 @@ function PlaceOrderScreen() {
 
   const dispatch = useDispatch();
 
-  const [createOrder, { isLoading, error }] = useCreateOrderMutation();
+  const [createOrder, { isLoading: isPlacingOrder, error }] =
+    useCreateOrderMutation();
 
   useEffect(() => {
     if (!cart.shippingAddress?.address) {
@@ -147,16 +148,18 @@ function PlaceOrderScreen() {
               )}
 
               <ListGroup.Item>
-                <Button
-                  type="button"
-                  className="btn-block"
-                  onClick={handlePlaceOrder}
-                  disabled={cart.cartItems.length === 0}
-                >
-                  Place Order
-                </Button>
-
-                {isLoading && <Loader />}
+                {isPlacingOrder ? (
+                  <SmallLoader />
+                ) : (
+                  <Button
+                    type="button"
+                    className="btn-block"
+                    onClick={handlePlaceOrder}
+                    disabled={cart.cartItems.length === 0}
+                  >
+                    Place Order
+                  </Button>
+                )}
               </ListGroup.Item>
             </ListGroup>
           </Card>

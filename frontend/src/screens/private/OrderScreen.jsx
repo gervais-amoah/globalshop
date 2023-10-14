@@ -60,7 +60,7 @@ function OrderScreen() {
   }, [errorPayPal, loadingPayPal, order, paypal?.clientId, paypalDisplatcher]);
 
   // FUNCTIONS FROM HERE
-  function onApprove(data, actions) {
+  function onApprove(_, actions) {
     return actions.order.capture().then(async function (details) {
       try {
         await payOrder({ orderId, details });
@@ -84,7 +84,7 @@ function OrderScreen() {
     toast.error(err?.data?.message || err.message);
   }
 
-  function createOrder(data, actions) {
+  function createOrder(_, actions) {
     return actions.order
       .create({
         purchase_units: [
