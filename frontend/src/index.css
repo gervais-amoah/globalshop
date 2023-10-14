@@ -7,6 +7,9 @@ main {
 .card-text {
   font-size: 0.8rem;
 }
+.review button {
+  margin-bottom: 10px;
+}
 .rating span {
   color: goldenrod;
 }
@@ -47,7 +50,13 @@ main {
   top: 50%;
   transform: translate(-50%, -50%);
 }
-.loader img {
+.loader__small {
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+}
+.loader img,
+.loader__small img {
   width: 100%;
   height: auto;
   object-fit: contain;
@@ -55,4 +64,14 @@ main {
 
 .btn-add svg {
   margin: 0 3px 3px 0;
+}
+
+.carousel-caption {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
 }

@@ -11,6 +11,7 @@ import { useRegisterMutation } from "../slices/usersApiSlice";
 function RegisterScreen() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -36,7 +37,12 @@ function RegisterScreen() {
       return toast.error("Passwords do not match");
 
     try {
-      const res = await register({ name, email, password }).unwrap();
+      const res = await register({
+        name,
+        email,
+        password,
+        phoneNumber,
+      }).unwrap();
       dispatch(setCredentials({ ...res }));
 
       navigate(redirect);
@@ -69,6 +75,17 @@ function RegisterScreen() {
             value={email}
             required
             onChange={(e) => setEmail(e.target.value)}
+          />
+        </Form.Group>
+
+        <Form.Group controlId="email" className="my-3">
+          <Form.Label>Phone Number</Form.Label>
+          <Form.Control
+            type="tel"
+            placeholder="Enter phone number"
+            value={phoneNumber}
+            required
+            onChange={(e) => setPhoneNumber(e.target.value)}
           />
         </Form.Group>
 
