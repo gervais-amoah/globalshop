@@ -6,6 +6,7 @@ import Loader from "../components/loader/Loader";
 import { useGetProductsQuery } from "../slices/productsApiSlice";
 import { Link, useParams } from "react-router-dom";
 import Paginate from "../components/Paginate";
+import ProductCarousel from "../components/ProductCarousel";
 
 function HomeScreen() {
   const { keyword, pageNumber } = useParams();
@@ -22,10 +23,12 @@ function HomeScreen() {
 
   return (
     <>
-      {keyword && (
+      {keyword ? (
         <Link to="/" className="btn btn-light my-3">
           Go Back
         </Link>
+      ) : (
+        <ProductCarousel />
       )}
       <h1>Latest Products</h1>
       <Row>

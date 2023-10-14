@@ -1,11 +1,15 @@
 import asyncHandler from "../middleware/asyncHandler.js";
 import Product from "../models/productModel.js";
 
+const PRODUCTS_LIST_SIZE = 12;
+const ADMIN_PRODUCTS_LIST_SIZE = 10;
+const TOP_PRODUCT_SIZE = 3;
+
 //  @desc   Fetch all products
 //  @route  GET /api/products
 //  @access Public
 const getProducts = asyncHandler(async (req, res) => {
-  const pageSize = 12; // 10
+  const pageSize = PRODUCTS_LIST_SIZE;
   const page = Number(req.query.pageNumber) || 1;
 
   const keyword = req.query.keyword
@@ -37,7 +41,7 @@ const getProductById = asyncHandler(async (req, res) => {
 //  @route  GET /api/products
 //  @access Public
 const adminGetProducts = asyncHandler(async (req, res) => {
-  const pageSize = 10; //  10
+  const pageSize = ADMIN_PRODUCTS_LIST_SIZE;
   const page = Number(req.query.pageNumber) || 1;
   const count = await Product.countDocuments();
 
@@ -45,6 +49,16 @@ const adminGetProducts = asyncHandler(async (req, res) => {
     .limit(pageSize)
     .skip(pageSize * (page - 1));
   res.json({ products, page, pages: Math.ceil(count / pageSize) });
+});
+
+//  @desc   Get top rated products
+//  @route  GET /api/products/top
+//  @access Public
+const getTopProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find({})
+    .sort({ rating: "-1" })
+    .limit(TOP_PRODUCT_SIZE);
+  res.status(200).json(products);
 });
 
 //  @desc   Create a new product
@@ -146,11 +160,12 @@ const createProductReview = asyncHandler(async (req, res) => {
 });
 
 export {
-  getProducts,
-  getProductById,
-  createProduct,
-  updateProduct,
-  deleteProduct,
   adminGetProducts,
+  createProduct,
   createProductReview,
+  deleteProduct,
+  getProductById,
+  getProducts,
+  getTopProducts,
+  updateProduct,
 };
