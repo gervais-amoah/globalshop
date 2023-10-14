@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
-import CheckoutSteps from "../components/CheckoutSteps";
+import CheckoutSteps from "../../components/CheckoutSteps";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { useCreateOrderMutation } from "../slices/ordersApiSlice";
-import { clearCartItems } from "../slices/cartSlice";
-import Message from "../components/Message";
-import Loader from "../components/loader/Loader";
+import { useCreateOrderMutation } from "../../slices/ordersApiSlice";
+import { clearCartItems } from "../../slices/cartSlice";
+import Message from "../../components/Message";
+import Loader from "../../components/loader/Loader";
 
 function PlaceOrderScreen() {
   const navigate = useNavigate();
@@ -85,7 +85,7 @@ function PlaceOrderScreen() {
                         </Col>
                         <Col>
                           <Link
-                            to={`/products/${item.product}`}
+                            to={`/product/${item._id}`}
                             className="underlined"
                           >
                             {item.name}

@@ -2,14 +2,14 @@ import React, { useEffect } from "react";
 import { Button, Card, Col, Image, ListGroup, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import Message from "../components/Message";
-import Loader from "../components/loader/Loader";
+import Message from "../../components/Message";
+import Loader from "../../components/loader/Loader";
 import {
   useGetOrderDetailsQuery,
   useGetPayPalClientIdQuery,
   usePayOrderMutation,
   useDeliverOrderMutation,
-} from "../slices/ordersApiSlice";
+} from "../../slices/ordersApiSlice";
 
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import { useSelector } from "react-redux";
@@ -73,11 +73,11 @@ function OrderScreen() {
     });
   }
 
-  async function onApproveTest() {
-    await payOrder({ orderId, details: { payer: {} } });
-    refetch();
-    toast.success("Payment successful");
-  }
+  // async function onApproveTest() {
+  //   await payOrder({ orderId, details: { payer: {} } });
+  //   refetch();
+  //   toast.success("Payment successful");
+  // }
 
   function onError(err) {
     console.error(err);

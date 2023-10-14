@@ -3,11 +3,11 @@ import { Table, Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { toast } from "react-toastify";
-import Message from "../components/Message";
-import Loader from "../components/loader/Loader";
-import { useProfileMutation } from "../slices/usersApiSlice";
-import { setCredentials } from "../slices/authSlice";
-import { useGetMyOrdersQuery } from "../slices/ordersApiSlice";
+import Message from "../../components/Message";
+import Loader from "../../components/loader/Loader";
+import { useProfileMutation } from "../../slices/usersApiSlice";
+import { setCredentials } from "../../slices/authSlice";
+import { useGetMyOrdersQuery } from "../../slices/ordersApiSlice";
 import { FaTimes } from "react-icons/fa";
 
 function ProfileScreen() {
