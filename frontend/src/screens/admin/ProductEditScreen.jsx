@@ -11,6 +11,7 @@ import Message from "../../components/Message";
 import Loader from "../../components/loader/Loader";
 import FormContainer from "../../components/FormContainer";
 import { toast } from "react-toastify";
+import SmallLoader from "../../components/loader/SmallLoader";
 
 export default function ProductEditScreen() {
   const { id: productId } = useParams();
@@ -29,10 +30,10 @@ export default function ProductEditScreen() {
     error,
   } = useGetProductDetailsQuery(productId);
 
-  const [updateProduct, { isLoading: loadingUpdate, error: errorUpdate }] =
+  const [updateProduct, { isLoading: isUpdating, error: errorUpdate }] =
     useUpdateProductMutation();
 
-  const [uploadProductImage, { isLoading: loadingUpload }] =
+  const [uploadProductImage, { isLoading: isUploading, error: uploadError }] =
     useUploadProductImageMutation();
 
   const navigate = useNavigate();
@@ -69,6 +70,7 @@ export default function ProductEditScreen() {
       navigate("/admin/productlist");
     } catch (err) {
       console.error(err);
+      if (errorUpdate) toast.error("Error while updating");
       toast.error(err.data?.message || err.message || err.error);
     }
   }
@@ -84,6 +86,7 @@ export default function ProductEditScreen() {
       setImage(res.image);
     } catch (err) {
       console.error(err);
+      if (uploadError) toast.error("Error while uploading");
       toast.error(err.data?.message || err.message || err.error);
     }
   }
@@ -146,6 +149,7 @@ export default function ProductEditScreen() {
               onChange={handleUploadFile}
             />
           </Form.Group>
+          {isUploading && <SmallLoader />}
 
           <Form.Group controlId="brand" className="my-4">
             <Form.Label>Brand</Form.Label>
@@ -189,9 +193,13 @@ export default function ProductEditScreen() {
             />
           </Form.Group>
 
-          <Button type="submit" variant="primary" className="my-2">
-            Save
-          </Button>
+          {isUpdating ? (
+            <SmallLoader />
+          ) : (
+            <Button type="submit" variant="primary" className="my-2">
+              Save
+            </Button>
+          )}
         </Form>
       </FormContainer>
     </>
