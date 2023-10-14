@@ -30,12 +30,12 @@ import UserEditScreen from "./screens/admin/UserEditScreen";
 import UserListScreen from "./screens/admin/UserListScreen";
 import CartScreen from "./screens/CartScreen";
 import LoginScreen from "./screens/LoginScreen";
-import OrderScreen from "./screens/OrderScreen";
-import PaymentScreen from "./screens/PaymentScreen";
-import PlaceOrderScreen from "./screens/PlaceOrderScreen";
-import ProfileScreen from "./screens/ProfileScreen";
+import OrderScreen from "./screens/private/OrderScreen";
+import PaymentScreen from "./screens/private/PaymentScreen";
+import PlaceOrderScreen from "./screens/private/PlaceOrderScreen";
+import ProfileScreen from "./screens/private/ProfileScreen";
 import RegisterScreen from "./screens/RegisterScreen";
-import ShippingScreen from "./screens/ShippingScreen";
+import ShippingScreen from "./screens/private/ShippingScreen";
 import store from "./store";
 
 const route = createBrowserRouter(
