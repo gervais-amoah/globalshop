@@ -63,6 +63,40 @@ main {
   font-size: 12px;
 }
 
+/* ================= */
+/* TABLES */
+.table-container {
+  border: 2px solid #f7eaea;
+  border-radius: 5px;
+  padding: 10px 5px;
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-container.centered th,
+.table-container.centered td {
+  text-align: center;
+}
+
+.table-container td:last-of-type {
+  text-align: start;
+}
+
+.table-contact {
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 0 6px;
+}
+.table-contact:hover {
+  border-color: #ccc;
+}
+
+/* ====================== */
+/* LOADERS */
 .loader-wrap {
   position: fixed;
   top: 0;
