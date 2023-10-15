@@ -17,13 +17,12 @@ import {
   useGetProductDetailsQuery,
 } from "../slices/productsApiSlice";
 
+import GoBack from "../components/GoBack";
 import Message from "../components/Message";
+import Meta from "../components/Meta";
 import Rating from "../components/Rating";
 import Loader from "../components/loader/Loader";
 import SmallLoader from "../components/loader/SmallLoader";
-import Meta from "../components/Meta";
-import { FaArrowLeft } from "react-icons/fa";
-import GoBack from "../components/GoBack";
 
 function ProductScreen() {
   const { id: productId } = useParams();

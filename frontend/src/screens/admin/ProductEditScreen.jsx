@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
+import { useNavigate, useParams } from "react-router-dom";
 
-import {
-  useUpdateProductMutation,
-  useGetProductDetailsQuery,
-  useUploadProductImageMutation,
-} from "../../slices/productsApiSlice";
+import { toast } from "react-toastify";
+import FormContainer from "../../components/FormContainer";
+import GoBack from "../../components/GoBack";
 import Message from "../../components/Message";
 import Loader from "../../components/loader/Loader";
-import FormContainer from "../../components/FormContainer";
-import { toast } from "react-toastify";
 import SmallLoader from "../../components/loader/SmallLoader";
-import GoBack from "../../components/GoBack";
+import {
+  useGetProductDetailsQuery,
+  useUpdateProductMutation,
+  useUploadProductImageMutation,
+} from "../../slices/productsApiSlice";
 
 export default function ProductEditScreen() {
   const { id: productId } = useParams();

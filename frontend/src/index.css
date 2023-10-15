@@ -1,4 +1,11 @@
+:root {
+  --grey-text: #999;
+}
+
 /* ======================== */
+.text-grey {
+  color: var(--grey-text);
+}
 main {
   min-height: calc(100vh - 100px);
 }
@@ -59,8 +66,15 @@ main {
 }
 .review-date {
   margin-top: 4px;
-  color: #999;
+  color: var(--grey-text);
   font-size: 12px;
+}
+
+/* ====================== */
+/* PLACE ORDER */
+.small-title {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
 }
 
 /* ================= */
