@@ -3,8 +3,12 @@
   background-image: url("banner.jpg"); /* Replace with your image URL */
   background-size: cover;
   background-position: center;
-  padding: 6rem;
   height: 75vh;
+
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .overlay {
@@ -22,14 +26,17 @@
 
 .banner-content {
   color: white;
-  margin: 0 auto;
   position: relative;
+  width: calc(100% - 20px);
+  padding: 3rem 1rem;
   z-index: 1;
+  /* margin: 0 auto; */
+  /* width: 100%; */
 }
 
 .banner-title {
-  font-size: 2.5rem;
-  margin: 0;
+  font-size: 2rem;
+  margin-bottom: 10px;
 }
 
 .banner-subtitle {
@@ -38,21 +45,27 @@
   line-height: 26px;
 }
 
-p {
+/* p {
   font-size: 1.25rem;
   margin: 10px 0;
   width: 70%;
-}
+} */
 
 /* Media query for responsiveness */
 
 @media (min-width: 992px) {
+  .banner {
+    padding: 6rem;
+  }
   .banner-content {
     max-width: 960px;
   }
 }
 
 @media (max-width: 768px) {
+  .banner {
+    padding: 4rem;
+  }
   .banner-content {
     left: 10px;
     max-width: 720px;
@@ -60,8 +73,13 @@ p {
 }
 
 @media (max-width: 576px) {
+  .banner {
+    padding: 0;
+  }
   .banner-content {
-    left: 10px;
     max-width: 540px;
+  }
+  .overlay {
+    background: linear-gradient(rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 100%);
   }
 }

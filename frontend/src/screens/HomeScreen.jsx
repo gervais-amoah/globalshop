@@ -7,6 +7,7 @@ import Paginate from "../components/Paginate";
 import Product from "../components/Product";
 import Loader from "../components/loader/Loader";
 import { useGetProductsQuery } from "../slices/productsApiSlice";
+import Banner from "../components/Banner/Banner";
 
 function HomeScreen() {
   const { keyword, pageNumber } = useParams();
@@ -31,7 +32,9 @@ function HomeScreen() {
         <ProductCarousel />
       )} */}
       <Meta />
+      <Banner />
       <h2 className="title">Latest Products</h2>
+
       <Row>
         {!data.products.length ? (
           <p>No Product</p>
