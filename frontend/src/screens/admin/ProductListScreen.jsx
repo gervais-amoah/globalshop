@@ -73,7 +73,7 @@ function ProductListScreen() {
     <>
       <Row className="align-items-center">
         <Col>
-          <h1>Products</h1>
+          <h1 className="title">Products</h1>
         </Col>
 
         <Col className="text-end p-3">
@@ -88,7 +88,7 @@ function ProductListScreen() {
         </Col>
       </Row>
       {data.products?.length > 0 ? (
-        <>
+        <div className="table-container">
           <Table striped hover responsive className="table-sm">
             <thead>
               <tr>
@@ -140,7 +140,7 @@ function ProductListScreen() {
           ) : (
             <Paginate isAdmin page={data.page} pages={data.pages} />
           )}
-        </>
+        </div>
       ) : (
         <h2>No Products</h2>
       )}

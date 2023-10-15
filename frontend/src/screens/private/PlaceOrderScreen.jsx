@@ -9,6 +9,14 @@ import SmallLoader from "../../components/loader/SmallLoader";
 import { clearCartItems } from "../../slices/cartSlice";
 import { useCreateOrderMutation } from "../../slices/ordersApiSlice";
 
+// FAKE ADDRESS
+const fakeAddress = {
+  address: ":",
+  city: "Lomé",
+  postalCode: "0000",
+  country: "TOGO",
+};
+
 function PlaceOrderScreen() {
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
@@ -26,12 +34,13 @@ function PlaceOrderScreen() {
     }
   }, [cart.paymentMethod, cart.shippingAddress?.address, navigate]);
 
+  // TODO SET THE ADDRESS AND PAYMENT METHOD
   async function handlePlaceOrder(evt) {
     try {
       const res = await createOrder({
         orderItems: cart.cartItems,
-        shippingAddress: cart.shippingAddress,
-        paymentMethod: cart.paymentMethod,
+        shippingAddress: fakeAddress, // cart.shippingAddress,
+        paymentMethod: "-", // cart.paymentMethod,
         itemsPrice: cart.itemsPrice,
         shippingPrice: cart.shippingPrice,
         taxPrice: cart.taxPrice,
@@ -40,6 +49,7 @@ function PlaceOrderScreen() {
       dispatch(clearCartItems());
       navigate(`/order/${res._id}`);
     } catch (err) {
+      if (error) toast.error("Something went wrong. Try again later");
       console.error(err);
       toast.error(err);
     }
@@ -47,28 +57,29 @@ function PlaceOrderScreen() {
 
   return (
     <>
-      <CheckoutSteps step1 step2 step3 step4 />
+      <CheckoutSteps step1 step4 />
       <Row>
         <Col md={8}>
           <ListGroup variant="flush">
             <ListGroup.Item>
-              <h2>Shipping</h2>
+              <h2 className="small-title">Shipping</h2>
               <p>
                 <strong>Address: </strong>
-                {cart.shippingAddress.address}, {cart.shippingAddress.city}{" "}
+                Togo
+                {/* {cart.shippingAddress.address}, {cart.shippingAddress.city}{" "}
                 {cart.shippingAddress.postalCode},{" "}
-                {cart.shippingAddress.country}
+                {cart.shippingAddress.country} */}
               </p>
             </ListGroup.Item>
 
             <ListGroup.Item>
-              <h2>Payment</h2>
-              <strong>Method: </strong>
-              {cart.paymentMethod}
+              <h2 className="small-title">Payment</h2>
+              <strong>Method: </strong> {"-"}
+              {/* {cart.paymentMethod} */}
             </ListGroup.Item>
 
             <ListGroup.Item>
-              <h2>Order Items</h2>
+              <h2 className="small-title">Order Items</h2>
               {cart.cartItems.length === 0 ? (
                 <Message>Your cart is empty</Message>
               ) : (
@@ -85,16 +96,13 @@ function PlaceOrderScreen() {
                           />
                         </Col>
                         <Col>
-                          <Link
-                            to={`/product/${item._id}`}
-                            className="underlined"
-                          >
-                            {item.name}
-                          </Link>
+                          <Link to={`/product/${item._id}`}>{item.name}</Link>
                         </Col>
                         <Col md={4}>
-                          {item.qty} x ${item.price} = $
-                          {Number(item.qty * item.price).toFixed(2)}
+                          <span className="text-grey">
+                            {item.qty} x ${item.price} ={" "}
+                          </span>
+                          ${Number(item.qty * item.price).toFixed(2)}
                         </Col>
                       </Row>
                     </ListGroup.Item>

@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useParams } from "react-router-dom";
+import FormContainer from "../../components/FormContainer";
+import GoBack from "../../components/GoBack";
+import Message from "../../components/Message";
+import Loader from "../../components/loader/Loader";
+import SmallLoader from "../../components/loader/SmallLoader";
 import {
   useGetUserDetailsQuery,
   useUpdateUserDetailsMutation,
 } from "../../slices/usersApiSlice";
-import FormContainer from "../../components/FormContainer";
-import Loader from "../../components/loader/Loader";
-import Message from "../../components/Message";
-import SmallLoader from "../../components/loader/SmallLoader";
 
 const UserEditScreen = () => {
   const { id: userId } = useParams();
@@ -75,9 +75,7 @@ const UserEditScreen = () => {
 
   return (
     <>
-      <Link to="/admin/userlist" className="btn btn-light my-3">
-        Go Back
-      </Link>
+      <GoBack to="/admin/userlist" />
       <FormContainer>
         <h1>Edit User</h1>
         {isLoading ? (

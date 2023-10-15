@@ -121,22 +121,22 @@ function OrderScreen() {
 
   return (
     <div>
-      <h1>Order {order._id}</h1>
+      <h1 className="subtitle">Order #{order._id}</h1>
       <Row>
         <Col md={8}>
           <ListGroup variant="flush">
             <ListGroup.Item>
-              <h2>Shipping</h2>
-              <p>
+              <h2 className="small-title">Shipping</h2>
+              <p className="mb-2">
                 <strong>Name: </strong> {order.user.name}
               </p>
-              <p>
+              <p className="mb-2">
                 <strong>Email: </strong> {order.user.email}
               </p>
-              <p>
+              <p className="mb-2">
                 <strong>Address: </strong>
-                {order.shippingAddress.address}, {order.shippingAddress.city}{" "}
-                {order.shippingAddress.postalCode},{" "}
+                {/* {order.shippingAddress.address}, {order.shippingAddress.city}{" "}
+                {order.shippingAddress.postalCode},{" "} */}
                 {order.shippingAddress.country}
               </p>
               {order.isDelivered ? (
@@ -149,8 +149,8 @@ function OrderScreen() {
             </ListGroup.Item>
 
             <ListGroup.Item>
-              <h2>Payment Method</h2>
-              <p>
+              <h2 className="small-title">Payment Method</h2>
+              <p className="mb-2">
                 <strong>Method: </strong>
                 {order.paymentMethod}
               </p>
@@ -226,7 +226,9 @@ function OrderScreen() {
                 </Row>
               </ListGroup.Item>
 
-              {!order.isPaid && (
+              {/* SHOULD SHOW PAY BTN HERE BUT NO MORE - !order.isPaid */}
+
+              {false && (
                 <ListGroup.Item>
                   {/* {loadingPay && <Loader />} */}
 
