@@ -84,8 +84,8 @@ function CartScreen() {
           <Message>
             Your cart is empty.{" "}
             <Link to="/" className="underlined">
-              Go Back
-            </Link>{" "}
+              Continue shopping
+            </Link>
           </Message>
         )}
       </Col>

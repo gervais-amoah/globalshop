@@ -12,6 +12,7 @@ import Loader from "../../components/loader/Loader";
 import FormContainer from "../../components/FormContainer";
 import { toast } from "react-toastify";
 import SmallLoader from "../../components/loader/SmallLoader";
+import GoBack from "../../components/GoBack";
 
 export default function ProductEditScreen() {
   const { id: productId } = useParams();
@@ -106,9 +107,7 @@ export default function ProductEditScreen() {
 
   return (
     <>
-      <Link to="/admin/productlist" className="btn btn-light my-3">
-        Go Back
-      </Link>
+      <GoBack to="/admin/productlist" />
 
       <FormContainer>
         <h1>Edit Product</h1>

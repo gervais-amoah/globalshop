@@ -1,6 +1,24 @@
+/* ======================== */
 main {
   min-height: calc(100vh - 100px);
 }
+
+.title {
+  font-size: 2rem;
+  margin: 2rem 0 1.5rem;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  padding: 0 1rem;
+  margin: 1.5rem 0 1rem;
+}
+
+.text-medium {
+  font-size: 1rem;
+  margin: 1rem 0;
+}
+
 .card-title {
   font-size: 1rem;
 }
@@ -30,6 +48,19 @@ main {
 .in-block {
   display: inline-block;
   width: fit-content;
+}
+
+/* ============ */
+/* PRODUCT DETAILS */
+.review-and-date {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5em;
+}
+.review-date {
+  margin-top: 4px;
+  color: #999;
+  font-size: 12px;
 }
 
 .loader-wrap {

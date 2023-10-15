@@ -22,6 +22,8 @@ import Rating from "../components/Rating";
 import Loader from "../components/loader/Loader";
 import SmallLoader from "../components/loader/SmallLoader";
 import Meta from "../components/Meta";
+import { FaArrowLeft } from "react-icons/fa";
+import GoBack from "../components/GoBack";
 
 function ProductScreen() {
   const { id: productId } = useParams();
@@ -90,9 +92,7 @@ function ProductScreen() {
   return (
     <>
       <Meta title={product.name} description={product.description} />
-      <Link className="btn btn-light my-3" to={"/"}>
-        Go Back
-      </Link>
+      <GoBack />
 
       <Row>
         <Col md={5}>
@@ -173,20 +173,24 @@ function ProductScreen() {
 
       <Row className="review">
         <Col md={6}>
-          <h2>Reviews</h2>
+          <h2 className="subtitle">Reviews</h2>
           {product.reviews.length === 0 && <Message>No Review</Message>}
           <ListGroup variant="flush">
             {product.reviews?.map((review) => (
               <ListGroup.Item key={review._id}>
                 <strong>{review.name}</strong>
-                <Rating value={review.rating} />
-                <p>{review.createdAt.substring(0, 10)}</p>
+                <div className="review-and-date">
+                  <Rating value={review.rating} />
+                  <p className="review-date">
+                    {review.createdAt.substring(0, 10)}
+                  </p>
+                </div>
                 <p>{review.comment}</p>
               </ListGroup.Item>
             ))}
 
             <ListGroup.Item>
-              <h2>Add Your Review</h2>
+              <h2 className="text-medium">Add Your Review</h2>
 
               {userInfo ? (
                 <Form onSubmit={handleAddReview}>

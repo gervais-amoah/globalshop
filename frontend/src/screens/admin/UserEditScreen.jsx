@@ -11,6 +11,7 @@ import FormContainer from "../../components/FormContainer";
 import Loader from "../../components/loader/Loader";
 import Message from "../../components/Message";
 import SmallLoader from "../../components/loader/SmallLoader";
+import GoBack from "../../components/GoBack";
 
 const UserEditScreen = () => {
   const { id: userId } = useParams();
@@ -75,9 +76,7 @@ const UserEditScreen = () => {
 
   return (
     <>
-      <Link to="/admin/userlist" className="btn btn-light my-3">
-        Go Back
-      </Link>
+      <GoBack to="/admin/userlist" />
       <FormContainer>
         <h1>Edit User</h1>
         {isLoading ? (

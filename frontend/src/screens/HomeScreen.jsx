@@ -1,13 +1,12 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 import Message from "../components/Message";
+import Meta from "../components/Meta";
+import Paginate from "../components/Paginate";
 import Product from "../components/Product";
 import Loader from "../components/loader/Loader";
 import { useGetProductsQuery } from "../slices/productsApiSlice";
-import { Link, useParams } from "react-router-dom";
-import Paginate from "../components/Paginate";
-import ProductCarousel from "../components/ProductCarousel";
-import Meta from "../components/Meta";
 
 function HomeScreen() {
   const { keyword, pageNumber } = useParams();
@@ -24,15 +23,15 @@ function HomeScreen() {
 
   return (
     <>
-      {keyword ? (
+      {/* {keyword ? (
         <Link to="/" className="btn btn-light my-3">
           Go Back
         </Link>
       ) : (
         <ProductCarousel />
-      )}
+      )} */}
       <Meta />
-      <h1>Latest Products</h1>
+      <h2 className="title">Latest Products</h2>
       <Row>
         {!data.products.length ? (
           <p>No Product</p>
