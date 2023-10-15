@@ -31,13 +31,15 @@ function CartScreen() {
   }
 
   function checkoutHandler() {
-    navigate("/login?redirect=/shipping");
+    navigate("/login?redirect=/placeorder");
   }
 
   return (
     <Row>
       <Col md={8}>
-        <h1 style={{ marginBottom: "20px" }}>Sopping Cart</h1>
+        <h1 style={{ marginBottom: "20px" }} className="subtitle">
+          Sopping Cart
+        </h1>
         {itemsQty > 0 ? (
           <ListGroup variant="flush">
             {cartItems.map((item) => (
@@ -84,8 +86,8 @@ function CartScreen() {
           <Message>
             Your cart is empty.{" "}
             <Link to="/" className="underlined">
-              Go Back
-            </Link>{" "}
+              Continue shopping
+            </Link>
           </Message>
         )}
       </Col>

@@ -1,6 +1,31 @@
+:root {
+  --grey-text: #999;
+}
+
+/* ======================== */
+.text-grey {
+  color: var(--grey-text);
+}
 main {
   min-height: calc(100vh - 100px);
 }
+
+.title {
+  font-size: 2rem;
+  margin: 2rem 0 1.5rem;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  padding: 0 1rem;
+  margin: 1.5rem 0 1rem;
+}
+
+.text-medium {
+  font-size: 1rem;
+  margin: 1rem 0;
+}
+
 .card-title {
   font-size: 1rem;
 }
@@ -32,6 +57,60 @@ main {
   width: fit-content;
 }
 
+/* ============ */
+/* PRODUCT DETAILS */
+.review-and-date {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5em;
+}
+.review-date {
+  margin-top: 4px;
+  color: var(--grey-text);
+  font-size: 12px;
+}
+
+/* ====================== */
+/* PLACE ORDER */
+.small-title {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+/* ================= */
+/* TABLES */
+.table-container {
+  border: 2px solid #f7eaea;
+  border-radius: 5px;
+  padding: 10px 5px;
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-container.centered th,
+.table-container.centered td {
+  text-align: center;
+}
+
+.table-container td:last-of-type {
+  text-align: start;
+}
+
+.table-contact {
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 0 6px;
+}
+.table-contact:hover {
+  border-color: #ccc;
+}
+
+/* ====================== */
+/* LOADERS */
 .loader-wrap {
   position: fixed;
   top: 0;

@@ -50,64 +50,68 @@ function UserListScreen() {
 
   return (
     <>
-      <h1>Orders</h1>
-      <Table striped hover responsive className="table-sm">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>NAME</th>
-            <th>EMAIL</th>
-            <th>PHONE NUMBER</th>
-            <th>JOINED</th>
-            <th>ADMIN</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {users?.map((user) => (
-            <tr key={user._id}>
-              <td>{shortenString(user._id)}</td>
-              <td>{shortenString(user.name)}</td>
-              <td>
-                {" "}
-                <a href={`mailto:${user.email}`}>{user.email}</a>{" "}
-              </td>
-              <td>{user.phoneNumber ?? "Not provided"}</td>
-              <td>{user.createdAt.substring(0, 10)}</td>
-              <td>
-                {user.isAdmin ? (
-                  <FaCheck style={{ color: "darkgreen" }} />
-                ) : (
-                  <FaTimes style={{ color: "red" }} />
-                )}
-              </td>
-              <td>
-                {isDeleting ? (
-                  <SmallLoader />
-                ) : (
-                  <>
-                    <LinkContainer to={`/admin/user/${user._id}/edit`}>
-                      <Button className="btn-sm mx-2" variant="warning">
-                        <FaEdit color="white" />
-                      </Button>
-                    </LinkContainer>
-
-                    {!user.isAdmin && (
-                      <Button
-                        className="btn-sm"
-                        variant={user.isAdmin ? "secondary" : "danger"}
-                        onClick={() => handleDelete(user._id)}
-                      >
-                        <FaTrash />
-                      </Button>
-                    )}
-                  </>
-                )}
-              </td>
+      <h1 className="title">Users</h1>
+      <div className="table-container centered">
+        <Table striped hover responsive className="table-sm">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>NAME</th>
+              <th>EMAIL</th>
+              <th>PHONE NUMBER</th>
+              <th>JOINED</th>
+              <th>ADMIN</th>
+              <th></th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {users?.map((user) => (
+              <tr key={user._id}>
+                <td>{shortenString(user._id)}</td>
+                <td>{shortenString(user.name)}</td>
+                <td>
+                  {" "}
+                  <a href={`mailto:${user.email}`} className="table-contact">
+                    {user.email}
+                  </a>{" "}
+                </td>
+                <td>{user.phoneNumber ?? "Not provided"}</td>
+                <td>{user.createdAt.substring(0, 10)}</td>
+                <td>
+                  {user.isAdmin ? (
+                    <FaCheck style={{ color: "darkgreen" }} />
+                  ) : (
+                    <FaTimes style={{ color: "red" }} />
+                  )}
+                </td>
+                <td>
+                  {isDeleting ? (
+                    <SmallLoader />
+                  ) : (
+                    <>
+                      <LinkContainer to={`/admin/user/${user._id}/edit`}>
+                        <Button className="btn-sm mx-2" variant="warning">
+                          <FaEdit color="white" />
+                        </Button>
+                      </LinkContainer>
+
+                      {!user.isAdmin && (
+                        <Button
+                          className="btn-sm"
+                          variant={user.isAdmin ? "secondary" : "danger"}
+                          onClick={() => handleDelete(user._id)}
+                        >
+                          <FaTrash />
+                        </Button>
+                      )}
+                    </>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
     </>
   );
 }
